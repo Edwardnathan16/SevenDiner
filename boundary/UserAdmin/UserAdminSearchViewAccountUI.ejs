@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="../images/favicon.png" type="">
+
+  <title> Seven Diner </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+
+
+  <!-- Custom styles for this template -->
+  <link href="../css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="../css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body class="sub_page">
+
+    <div class="hero_area">
+      <div class="bg-box">
+        <img src="../images/hero-bg.jpg" alt="">
+      </div>
+      <header class="header_section">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="/UserAdmin">
+              <span>
+                Seven Diner
+              </span>
+            </a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""> </span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav  mx-auto" style="padding-left:700px">
+
+                <li class="nav-item">
+                  <a class="nav-link" onclick="window.location.href='/LogoutController'">Log Out</a>
+
+              </li>
+              </ul>
+
+            </div>
+          </nav>
+        </div>
+      </header>
+    </div>
+    <section class="form_section layout_padding">
+        <div class="container">
+          <div class="heading_container">
+            <h2>
+              Search Account
+            </h2>
+          </div>
+
+            <form action="/UserAdminSearchAccountController" method="post">
+                <div>
+                  <select class="form-control nice-select wide" name="userType" id="attributeType" style="width:25%">
+                    <option value="" disabled selected>
+                      Role Name
+                    </option>
+                    <option value="owner">
+                      Owner
+                    </option>
+                    <option value="useradmin">
+                      User Admin
+                    </option>
+                    <option value="manager">
+                      Managers
+                    </option>
+                    <option value="staff">
+                      Staff
+                    </option>
+                    <option value="customer">
+                      Customers
+                    </option>
+                  </select>
+              </div> <br>
+
+                <div class="">
+                    <select class="form-control nice-select wide" name="attributeType" id="attributeType" style="width:25%">
+                      <option value="" disabled selected>
+                        Attribute
+                      </option>
+                      <option value="username">
+                        Username
+                      </option>
+                      <option value="password">
+                        Password
+                      </option>
+                      <option value="email">
+                        Email
+                      </option>
+                      <option value="firstName">
+                        First Name
+                      </option>
+                      <option value="lastName">
+                        Last Name
+                      </option>
+                    </select>
+                </div> <br>
+
+                <h4 style="padding-top: 10px;">
+                  Looking For:
+                </h4>
+
+              <div>
+                <input style="width:25%" type="text" class="form-control" name="searchData" id="searchData" placeholder="Type here..." />
+              </div>
+              <div>
+                <button class="yellow-button" type="submit">
+                  Search
+                </button>
+              </div>
+              <br/>
+              <br/>
+             </form>
+
+            <div>
+
+              <table border="1" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Username</th>
+                    <th>Password</th>
+                    <th>Email</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Role Name</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if(data.length> 0) { %>
+
+                    <% data.forEach(function(user) { %>
+                      <tr>
+                        <td style="width:15%"><%= user.username %></td>
+                        <td style="width:15%"><%= user.password %></td>
+                        <td style="width:20%"><%= user.email %></td>
+                        <td style="width:15%"><%= user.firstName %></td>
+                        <td style="width:15%"><%= user.lastName %> </td>
+                        <td style="width:15%"><%= user.roleName %></td>
+                      </tr>
+                      <% }); %>
+
+                  <% } else { %>
+                    <h3>No Results</h3>
+                  <% } %>
+
+                </tbody>
+              </table>
+            </div>
+        </div>
+    </section>
+
+
+
+</body>
+
+</html>

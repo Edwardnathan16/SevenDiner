@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="../images/favicon.png" type="">
+
+  <title> Seven Diner </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+
+
+  <!-- Custom styles for this template -->
+  <link href="../css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="../css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body class="sub_page">
+
+    <div class="hero_area">
+      <div class="bg-box">
+        <img src="../images/hero-bg.jpg" alt="">
+      </div>
+      <header class="header_section">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="/Owner">
+              <span>
+                Seven Diner
+              </span>
+            </a>
+  
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""> </span>
+            </button>
+  
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav  mx-auto" style="padding-left:700px">
+                
+                <li class="nav-item">
+                  <a class="nav-link" onclick="window.location.href='/LogoutController'">Log Out</a>
+                
+              </li>
+              </ul>
+              
+            </div>
+          </nav>
+        </div>
+      </header>
+    </div>
+    <section class="form_section layout_padding">
+        <div class="container">
+          <div class="heading_container">
+            <h2>
+              Preferred Dishes
+            </h2>
+          </div>
+          <h4 style="padding-top: 10px;">
+            Please enter the end date:
+          </h4>
+          <div>
+            <input style="width:25%" type="date" class="form-control" name="startDate" id="startDate" onchange="setDay()" />
+            
+          </div>
+          <div style="display:inline;">
+            <form style="display: inline-block;" action="/OwnerGetPreferredDishesPerDayController" method="post">
+              <input style="width:25%" type="hidden" class="form-control" name="datePerDay" id="datePerDay" value="" />
+              
+                <button class="yellow-button" type="submit">
+                  Per Day
+                </button>
+             </form>
+             <form style="display: inline-block; margin-left: 10px;" action="/OwnerGetPreferredDishesPerWeekController" method="post">
+              <input style="width:25%" type="hidden" class="form-control" name="datePerWeek" id="datePerWeek" value="" />
+              
+                <button class="yellow-button" type="submit">
+                  Per Week
+                </button>
+             </form>
+             <form style="display: inline-block; margin-left: 10px;" action="/OwnerGetPreferredDishesPerMonthController" method="post">
+              <input style="width:25%" type="hidden" class="form-control" name="datePerMonth" id="datePerMonth" value="" />
+              
+                <button class="yellow-button" type="submit">
+                  Per Month
+                </button>
+             </form>
+            </div>
+            <br/>
+            <br/>
+         <h1>Preferred Dish on That Time Period: <%= data %></h1>
+         <h1>With Total Order of: <%= cData %></h1>
+        </div>
+    </section>
+
+  
+
+</body>
+<script>
+  function setDay()
+  {
+    var startDate = document.getElementById("startDate").value;
+    document.getElementById("datePerDay").setAttribute("value", startDate);
+    document.getElementById("datePerWeek").setAttribute("value", startDate);
+    document.getElementById("datePerMonth").setAttribute("value", startDate);
+  }
+  
+</script>
+
+</html>

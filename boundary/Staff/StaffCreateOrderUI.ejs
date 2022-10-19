@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="../images/favicon.png" type="">
+
+  <title> Seven Diner </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+
+  <!-- Custom styles for this template -->
+  <link href="../css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="../css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body class="sub_page">
+
+  <div class="hero_area">
+    <div class="bg-box">
+      <img src="../images/hero-bg.jpg" alt="">
+    </div>
+    <header class="header_section">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+          <a class="navbar-brand" href="/Staff">
+            <span>
+              Seven Diner
+            </span>
+          </a>
+
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class=""> </span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav  mx-auto" style="padding-left:700px">
+              
+              <li class="nav-item">
+                <a class="nav-link" onclick="window.location.href='/LogoutController'">Log Out</a>
+              
+            </li>
+            </ul>
+            
+          </div>
+        </nav>
+      </div>
+    </header>
+  </div>
+
+
+  <section class="image_section layout_padding">
+    <div class="container">
+      <div class="heading_container heading_center">
+        <h2>
+          Create an Order
+        </h2>
+      </div>
+
+      <div class="heading_container heading_center">
+        <a href="#cart"><button class="yellow-button">Go to Cart</button></a>
+      </div>
+
+      <div id="menu" style="padding-top: 30px;" class="heading_container heading_center">
+        <h3>
+          Our Menu
+        </h3>
+      </div>
+
+      <ul class="filters_menu">
+        
+        <li class="active" data-filter="*">All</li>
+        <li data-filter=".meat">Meats</li>
+        <li data-filter=".vegetables">Vegetables</li>
+        <li data-filter=".misc">Misc</li>
+        
+      </ul>
+
+      <div class="filters-content">
+        <div class="row grid">
+          <% if(data.length> 0) { %>
+            
+            <% data.forEach(function(menuitem) { %>
+              <form action="/AddToCart" method="post">
+                <div class="col-sm-6 col-lg-4 all <%= menuitem.type %>">
+                  <div class="menubox">
+                      <div class="detail-box">
+                        <h5>
+                          <%= menuitem.menuName %>
+                        </h5>
+                        <p>
+                          <%= menuitem.description %>
+                        </p>
+                        <div class="options">
+                          <h5>
+                            $<%= menuitem.price %>
+                          </h5>
+                          <input type="hidden" name="menuID" value=<%= menuitem.menuID %>>
+                          <input type="hidden" name="menuName" value="<%= menuitem.menuName %>">
+                          <input type="hidden" name="price" value=<%= menuitem.price %>>
+                          <input type="hidden" name="description" value="<%= menuitem.description %>">
+                          <input style="width:70px;" type="text" name="quantity" placeholder="Qty">
+                          <button class="yellow-button-small" type="submit">
+                            Add
+                          </button>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+              <% }); %>
+
+          <% } else { %>
+              <h1>No Results</h1>
+          <% } %>
+        </div>
+      </div>
+
+      <div id="cart" style="padding-top: 50px;" class="heading_container heading_center">
+        <h3>
+          Item Cart
+        </h3>
+      </div>
+      <div class="heading_container heading_center">
+        <a href="#menu"><button class="yellow-button">Go to Menu</button></a>
+      </div>
+
+      <div class="filters-content">
+        <div class="row grid">
+        <% if(cData.length> 0) { %>
+          
+          <% cData.forEach(function(currentorder) { %>
+            <form action="/StaffDeleteMenuItemController" method="post">
+              <div class="col-sm-6 col-lg-4 all meat vegetables misc">
+                <div class="menubox">
+                    <div class="detail-box">
+                      <h5>
+                        <%= currentorder.menuName %>
+                      </h5>
+                      <p>
+                        Quantity: <%= currentorder.quantity %>
+                      </p>
+                      <div class="options">
+                        <h5>
+                          $<%= currentorder.price %>
+                        </h5>
+                        <input type="hidden" name="placeholderID" value=<%= currentorder.placeholderID %>>
+                        <input type="hidden" name="menuName" value="<%= currentorder.menuName %>">
+                        <input type="hidden" name="price" value=<%= currentorder.price %>>
+                        <input type="hidden" name="quantity" value=<%= currentorder.quantity %>>
+                        <button class="red-button-small" type="submit">
+                          Delete
+                        </button>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+            <% }); %>
+
+        <% } else { %>
+        <% } %>
+        
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div class="form_container">
+        <form action="/StaffCreateOrderController" method="post">
+          <div style="padding-top: 50px;" class="heading_container heading_center">
+            <h3>
+              Personal information
+            </h3>
+            <br/>
+              <div>
+              <input type="text" style="width:300px" class="form-control" name="customerUsername" placeholder="Enter Customer Username">
+              <br/>
+            </div>
+            <div>
+              <input type="text" style="width:300px" class="form-control" name="couponCode" placeholder="Enter Coupon Code">
+              <br/>
+              <br/>
+            </div>
+            <div>
+              <h3>Select a Payment Method</h3>
+              <br/>
+            </div>
+          </div>
+          <div style=" width: 100%; text-align: center;">
+            <label style="display:inline-block">
+              <input type="radio" name="paymentMethod" value="visa">
+              <img src="../images/visa.png" width="200px">
+            </label>
+            <label style="display:inline-block">
+              <input type="radio" name="paymentMethod" value="mastercard" >
+              <img src="../images/mastercard.png" width="200px">
+            </label>
+         </div>
+         <div style="margin:auto" class="heading_container heading_center">
+          <button class="yellow-button" type="submit">
+            Order
+          </button>
+        </div>
+          </div>
+          
+        </form>
+    </div>
+    </div>
+    
+  </section>
+  <span id="displayYear"></span>
+
+  
+
+  <!-- jQuery -->
+  <script src="../js/jquery-3.4.1.min.js"></script>
+  <!-- bootstrap js -->
+  <script src="../js/bootstrap.js"></script>
+  <!-- isotope js -->
+  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+  <!-- custom js -->
+  <script src="../js/custom.js"></script>
+  
+
+</body>
+
+</html>

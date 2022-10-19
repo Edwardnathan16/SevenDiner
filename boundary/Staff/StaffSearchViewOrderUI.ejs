@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="../images/favicon.png" type="">
+
+  <title> Seven Diner </title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="../css/bootstrap.css" />
+
+
+  <!-- Custom styles for this template -->
+  <link href="../css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="../css/responsive.css" rel="stylesheet" />
+
+</head>
+
+<body class="sub_page">
+
+    <div class="hero_area">
+      <div class="bg-box">
+        <img src="../images/hero-bg.jpg" alt="">
+      </div>
+      <header class="header_section">
+        <div class="container">
+          <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="/Staff">
+              <span>
+                Seven Diner
+              </span>
+            </a>
+  
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""> </span>
+            </button>
+  
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav  mx-auto" style="padding-left:700px">
+                
+                <li class="nav-item">
+                  <a class="nav-link" onclick="window.location.href='/LogoutController'">Log Out</a>
+                
+              </li>
+              </ul>
+              
+            </div>
+          </nav>
+        </div>
+      </header>
+    </div>
+    <section class="form_section layout_padding">
+        <div class="container">
+          <div class="heading_container">
+            <h2>
+              Search Order
+            </h2>
+          </div>
+          <h4 style="padding-top: 10px;">
+            Please enter a order ID:
+          </h4>
+            <form action="/StaffSearchOrderController" method="post">
+              <div>
+                <input style="width:25%" type="text" class="form-control" name="orderID" id="orderID" placeholder="Order ID" />
+              </div>
+              <div>
+                <button class="yellow-button" type="submit">
+                  Search
+                </button>
+              </div>
+              <br/>
+              <br/>
+             </form>
+         
+            <div>
+              <table border="1" style="width:100%">
+                <thead>
+                  <tr>
+                    <th>Order ID</th>
+                    <th>Menu List</th>
+                    <th>Total Price</th>
+                    <th>Payment Method</th>
+                    <th>Coupon Code</th>
+                    <th>Customer Username</th>
+                    <th>Order Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if(data.length> 0) { %>
+  
+                    <% data.forEach(function(order) { %>
+                      <tr>
+                        <td><%= order.orderID %></td>
+                        <td style="width:30%"><%= order.menuList %></td>
+                        <td><%= order.totalPrice %></td>
+                        <td><%= order.paymentMethod %></td>
+                        <td><%= order.couponCode %> </td>
+                        <td><%= order.customerUsername %></td>
+                        <td><%= order.orderDate %></td>
+                      </tr>
+                      <% }); %>
+      
+                  <% } else { %>
+                    <h3>No Results</h3>
+                  <% } %>
+                  
+                </tbody>
+              </table>
+            </div>
+            
+        </div>
+    </section>
+
+  
+
+</body>
+
+</html>
